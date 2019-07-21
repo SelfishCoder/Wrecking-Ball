@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace WreckingBall
 {
@@ -17,6 +18,15 @@ namespace WreckingBall
         {
             Time.timeScale = 1;
         }
-    
+
+        public void LoadLevel(string levelName)
+        {
+            SceneManager.LoadScene(levelName);
+        }
+
+        public void LoadNexLevel()
+        {
+            SceneManager.LoadScene(SceneManager.GetCurrentSceneIndex() + 1);
+        }
     }
 }

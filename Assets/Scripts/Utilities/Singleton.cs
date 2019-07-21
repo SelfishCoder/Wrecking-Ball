@@ -3,9 +3,9 @@
 namespace WreckingBall
 {
     /// <summary>
-    /// Base class for singleton objects. Singleton classes are inherited from this base class.
+    /// Base class for singleton objects. Singleton classes inherits from this base class.
     /// </summary>
-    public class Singleton<T> : MonoBehaviour where T: MonoBehaviour
+    public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         private T instance;
         public T Instance
