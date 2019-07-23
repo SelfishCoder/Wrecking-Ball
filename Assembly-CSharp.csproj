@@ -66,7 +66,7 @@
     <Compile Include="Assets\Scripts\Managers\UiManager.cs" />
     <Compile Include="Assets\Scripts\Utilities\Singleton.cs" />
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>C:/Users/Meriç/Desktop/Unity Projects/Wrecking Ball/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>C:/Projects/Unity Projects/Wrecking Ball/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Applications/Unity/Unity Editor Versions/2019.1.11f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
