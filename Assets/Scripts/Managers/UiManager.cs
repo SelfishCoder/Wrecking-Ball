@@ -14,8 +14,8 @@ namespace WreckingBall
 
         private void Awake()
         {
-            levelsPanel = FindReferenceOfGameobject("Levels Panel");
-            mainMenuPanel = FindReferenceOfGameobject("Main Menu Panel");
+            levelsPanel = FindReferenceOfGameobject("Levels_Panel");
+            mainMenuPanel = FindReferenceOfGameobject("MainMenu_Panel");
             OpenMainMenuPanel();
             CloseLevelsPanel();
         }
@@ -32,9 +32,9 @@ namespace WreckingBall
             Time.timeScale = 1;
         }
 
-        public void LoadLevel()
+        public void LoadLevel(string sceneName)
         {
-            SceneManager.LoadScene("Level1");
+            SceneManager.LoadScene(sceneName);
             GameManager.CurrentGameState = GameState.InGame;
         }
 
