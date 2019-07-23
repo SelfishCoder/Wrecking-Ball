@@ -9,7 +9,13 @@ namespace WreckingBall
     public class GameManager : Singleton<GameManager>
     {
         [SerializeField, Tooltip("State of the game in the lifetime.")]
-        private static GameState currentGameState = GameState.MainMenu;
+        private static GameState currentGameState;
+
+        public static GameState CurrentGameState
+        {
+            get => currentGameState;
+            set => currentGameState = value;
+        }
 
         /// <summary>
         /// Awake is called when the script instance is being loaded.
@@ -32,7 +38,7 @@ namespace WreckingBall
                     break;
 
                 case GameState.InGame:
-
+                    
                     break;
 
                 case GameState.PauseMenu:

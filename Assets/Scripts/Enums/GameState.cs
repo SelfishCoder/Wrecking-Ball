@@ -1,7 +1,7 @@
 ﻿namespace WreckingBall
 {
     /// <summary>
-    /// Constants for state of game. States are controlled by Game Manager.
+    /// Constants for state of the game. States are controlled by Game Manager.
     /// </summary>
     public enum GameState
     {

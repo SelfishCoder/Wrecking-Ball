@@ -1,4 +1,5 @@
-﻿using UnityEngine.UI;
+﻿using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace WreckingBall
 {
@@ -26,7 +27,7 @@ namespace WreckingBall
         public static void LoadScene(string sceneName)
         {
             int sceneIndex = UnityEngine.SceneManagement.SceneManager.GetSceneByName(sceneName).buildIndex;
-            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneIndex);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
         }
 
         /// <summary>

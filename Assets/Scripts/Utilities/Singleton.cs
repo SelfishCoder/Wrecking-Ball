@@ -5,31 +5,29 @@ namespace WreckingBall
     /// <summary>
     /// Base class for singleton objects. Singleton classes inherits from this base class.
     /// </summary>
-    public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+    public class Singleton<TypeOfSingleton> : MonoBehaviour where TypeOfSingleton: MonoBehaviour
     {
-        private T instance;
-        public T Instance
-        {
-            get => instance;
-            set => instance = value;
-        }
+        /// <summary>
+        /// Field of the instance object of the class which derives from this base class.
+        /// </summary>
+        public TypeOfSingleton Instance { get; private set; }
 
         /// <summary>
         /// This function is called when the object becomes enabled and active.
         /// </summary>
-        void OnEnable()
+        private void Awake()
         {
-            if (instance == null)
+            if (Instance == null)
             {
-                instance = (T) FindObjectOfType(typeof(T));
-                if (instance != null)
+                Instance = (TypeOfSingleton) FindObjectOfType(typeof(TypeOfSingleton));
+                if (Instance != null)
                 {
-                    DontDestroyOnLoad(instance);
+                    DontDestroyOnLoad(Instance);
                 }
                 else
                 {
                     GameObject go = new GameObject();
-                    instance = go.AddComponent<T>();
+                    Instance = go.AddComponent<TypeOfSingleton>();
                     DontDestroyOnLoad(go);
                 }
             }
