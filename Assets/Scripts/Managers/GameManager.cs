@@ -38,7 +38,6 @@ namespace WreckingBall
                     break;
 
                 case GameState.InGame:
-                    
                     break;
 
                 case GameState.PauseMenu:

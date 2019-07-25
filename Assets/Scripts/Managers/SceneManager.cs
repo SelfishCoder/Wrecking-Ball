@@ -1,4 +1,5 @@
-﻿using UnityEngine.SceneManagement;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace WreckingBall
@@ -63,6 +64,19 @@ namespace WreckingBall
         {
             int buildIndex = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
             LoadScene(buildIndex);
+        }
+
+        /// <summary>
+        /// This method moves the specified gameobjects to the specified scene.
+        /// </summary>
+        /// <param name="gameObjects">GameObjects which should move.</param>
+        /// <param name="scene">Scene where gameobjects should move to.</param>
+        public static void MoveGameObjectsToScene(GameObject[] gameObjects, Scene scene)
+        {
+            foreach (GameObject go in gameObjects)
+            {
+                UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(go,scene);
+            }
         }
     }
 }
