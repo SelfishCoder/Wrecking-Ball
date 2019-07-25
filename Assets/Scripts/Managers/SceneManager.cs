@@ -30,6 +30,7 @@ namespace WreckingBall
 
         /// <summary>
         /// This method loads the specified scene with the given scene index.
+        /// (This method is the overload method of the LoadScene(string SceneName)).
         /// </summary>
         /// <param name="sceneIndex"></param>
         public static void LoadScene(int sceneIndex)
@@ -53,6 +54,15 @@ namespace WreckingBall
         public static string GetCurrentSceneName()
         {
             return UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        }
+
+        /// <summary>
+        /// This method reloads the currently active scene.
+        /// </summary>
+        public static void ReloadCurrentScene()
+        {
+            int buildIndex = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
+            LoadScene(buildIndex);
         }
     }
 }

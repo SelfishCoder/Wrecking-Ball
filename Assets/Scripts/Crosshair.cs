@@ -14,10 +14,19 @@ namespace WreckingBall
     {
         [SerializeField] private CrosshairState crosshairState;
         [SerializeField] private Vector3 deflection;
-        [SerializeField] private float speed;
-        private Vector2 canvasReferenceResolution = new Vector2(1080,1920);
+        [SerializeField] private float crosshairHorizontalSpeed;
+        [SerializeField] private float crosshairVerticalSpeed;
+        [SerializeField] private int powerbarFillSpeed;
+        private readonly Vector2 canvasReferenceResolution = new Vector2(1080, 1920);
         private Vector3 newPosition;
         private float timeElapsed;
+        private float power;
+
+        [Header("Refences to UI Elements")] [SerializeField]
+        private Slider powerBarUI;
+
+        [SerializeField] private Image powerImage;
+        [SerializeField] private Text powerText;
 
         /// <summary>
         /// Start is called on the frame when a script is enabled just before
@@ -25,7 +34,10 @@ namespace WreckingBall
         /// </summary>
         private void Start()
         {
-            speed = 2f;
+            powerBarUI.gameObject.SetActive(false);
+            powerImage.gameObject.SetActive(false);
+            crosshairHorizontalSpeed = 2.5f;
+            crosshairVerticalSpeed = 3f;
             CalculateDeflectionOfCrosshair();
             timeElapsed = 0;
             newPosition = Vector3.zero;
@@ -37,8 +49,8 @@ namespace WreckingBall
         /// </summary>
         private void CalculateDeflectionOfCrosshair()
         {
-            float deflectionX = canvasReferenceResolution.x - (this.GetComponent<RectTransform>().sizeDelta.x / 2);
-            float deflectionY = canvasReferenceResolution.y - (this.GetComponent<RectTransform>().sizeDelta.y / 2);
+            float deflectionX = (((canvasReferenceResolution.x / 2) / 10) * 9) - (this.GetComponent<RectTransform>().sizeDelta.x / 2);
+            float deflectionY = (((canvasReferenceResolution.y / 2) / 10) * 9) - (this.GetComponent<RectTransform>().sizeDelta.y / 2);
             deflection = new Vector3(deflectionX, deflectionY, 0);
         }
 
@@ -47,7 +59,7 @@ namespace WreckingBall
         /// </summary>
         private void MoveCrosshairHorizontally(float horizontalDeflection)
         {
-            newPosition.x = Mathf.Sin(timeElapsed * speed) * horizontalDeflection;
+            newPosition.x = Mathf.Sin(timeElapsed * crosshairHorizontalSpeed) * horizontalDeflection;
             transform.localPosition = newPosition;
         }
 
@@ -56,8 +68,16 @@ namespace WreckingBall
         /// </summary>
         private void MoveCrosshairVertically(float verticalDeflection)
         {
-            newPosition.y = Mathf.Sin(timeElapsed * speed) * verticalDeflection;
+            newPosition.y = Mathf.Sin(timeElapsed * crosshairVerticalSpeed) * verticalDeflection;
             transform.localPosition = newPosition;
+        }
+
+        private void PowerPingPong()
+        {
+            timeElapsed++;
+            power = Mathf.PingPong(timeElapsed * powerbarFillSpeed, 100f);
+            powerBarUI.value = power;
+            powerText.text = powerBarUI.value.ToString();
         }
 
         /// <summary>
@@ -85,6 +105,8 @@ namespace WreckingBall
                     {
                         crosshairState = CrosshairState.OnPowerSelection;
                         timeElapsed = 0;
+                        powerBarUI.gameObject.SetActive(true);
+                        powerImage.gameObject.SetActive(true);
                     }
 
                     break;
@@ -92,6 +114,9 @@ namespace WreckingBall
                 case CrosshairState.None:
                     break;
                 case CrosshairState.OnPowerSelection:
+                    PowerPingPong();
+                    if (InputManager.IsScreenTapted())
+                        crosshairState = CrosshairState.None;
                     break;
                 default:
                     break;

@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelManager : MonoBehaviour
+namespace WreckingBall
 {
-    
+    public class LevelManager
+    {
+        
+    }
 }
