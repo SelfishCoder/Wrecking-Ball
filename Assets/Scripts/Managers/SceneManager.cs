@@ -12,12 +12,10 @@ namespace WreckingBall
         /// This method checks if the scene is equal to active scene by name of the scene.
         /// </summary>
         /// <param name="sceneName">Name of the scene.</param>
-        /// <returns></returns>
+        /// <returns>True or false</returns>
         public static bool IsCurrentScene(string sceneName)
         {
-            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().Equals(UnityEngine.SceneManagement.SceneManager.GetSceneByName(sceneName)))
-                return true;
-            return false;
+            return UnityEngine.SceneManagement.SceneManager.GetActiveScene().Equals(UnityEngine.SceneManagement.SceneManager.GetSceneByName(sceneName));
         }
 
         /// <summary>
@@ -38,7 +36,7 @@ namespace WreckingBall
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene(sceneIndex);
         }
-        
+
         /// <summary>
         /// This method finds the currently active scene and returns the build index of it.
         /// </summary>

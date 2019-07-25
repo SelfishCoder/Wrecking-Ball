@@ -64,6 +64,8 @@
     <Compile Include="Assets\Scripts\Enums\GameState.cs" />
     <Compile Include="Assets\Scripts\Main Camera.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\InputManager.cs" />
+    <Compile Include="Assets\Scripts\Managers\LevelManager.cs" />
     <Compile Include="Assets\Scripts\Managers\SceneManager.cs" />
     <Compile Include="Assets\Scripts\Managers\UiManager.cs" />
     <Compile Include="Assets\Scripts\Utilities\Singleton.cs" />
