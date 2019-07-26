@@ -1,5 +1,7 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
+using WreckingBall;
 
 namespace WreckingBall
 {
@@ -11,43 +13,26 @@ namespace WreckingBall
     {
         [SerializeField] private GameObject levelsPanel;
         [SerializeField] private GameObject mainMenuPanel;
+        [SerializeField] private Button levelButton;
 
         private void Awake()
         {
-            levelsPanel = FindReferenceOfGameobject("Levels_Panel");
-            mainMenuPanel = FindReferenceOfGameobject("MainMenu_Panel");
+            levelsPanel = transform.FindReferenceOfChild("Levels_Panel");
+            mainMenuPanel = transform.FindReferenceOfChild("MainMenu_Panel");
             OpenMainMenuPanel();
             CloseLevelsPanel();
         }
 
-        public void ChangeGameState(GameState gameState)
-        {
-            GameManager.CurrentGameState = gameState;
-        }
-        
         public void PauseGame()
         {
-            OpenMainMenuPanel();
             Time.timeScale = 0;
         }
 
         public void ResumeGame()
         {
-            CloseMainMenuPanel();
             Time.timeScale = 1;
         }
-
-        public void LoadLevel(string sceneName)
-        {
-            SceneManager.LoadScene(sceneName);
-            GameManager.CurrentGameState = GameState.InGame;
-        }
-
-        public void LoadNextLevel()
-        {
-            SceneManager.LoadScene(SceneManager.GetCurrentSceneIndex() + 1);
-        }
-
+        
         public void OpenLevelsPanel()
         {
             levelsPanel.SetActive(true);
@@ -66,18 +51,6 @@ namespace WreckingBall
         public void CloseMainMenuPanel()
         {
             mainMenuPanel.SetActive(false);
-        }
-
-        private GameObject FindReferenceOfGameobject(string referenceName)
-        {
-            foreach (Transform t in this.transform)
-            {
-                if (t.gameObject.name.Equals(referenceName))
-                {
-                    return t.gameObject;
-                }
-            }
-            return null;
         }
     }
 }

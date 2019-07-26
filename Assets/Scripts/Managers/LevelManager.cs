@@ -7,7 +7,7 @@ namespace WreckingBall
     public class LevelManager : Singleton<LevelManager>
     {
         [Header("Configuration")]
-        [SerializeField] private List<Level> levels;
+        public List<Level> levels;
         
         [Header("Values")]
         [SerializeField] private Level currentLevel;
@@ -33,7 +33,7 @@ namespace WreckingBall
             LevelManager.Instance.nextLevel.IsUnlocked = true;
         }
 
-        public static void RestartLevel()
+        public void RestartLevel()
         {
             SceneManager.ReloadCurrentScene();
         }
