@@ -20,6 +20,11 @@ namespace WreckingBall
             CloseLevelsPanel();
         }
 
+        public void ChangeGameState(GameState gameState)
+        {
+            GameManager.CurrentGameState = gameState;
+        }
+        
         public void PauseGame()
         {
             OpenMainMenuPanel();

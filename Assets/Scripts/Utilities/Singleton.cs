@@ -10,7 +10,7 @@ namespace WreckingBall
         /// <summary>
         /// Field of the instance object of the class which derives from this base class.
         /// </summary>
-        public TypeOfSingleton Instance { get; private set; }
+        public static TypeOfSingleton Instance { get; private set; }
 
         /// <summary>
         /// This function is called when the object becomes enabled and active.

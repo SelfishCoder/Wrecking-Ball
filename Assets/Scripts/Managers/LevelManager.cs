@@ -4,19 +4,38 @@ using UnityEngine;
 
 namespace WreckingBall
 {
-    public static class LevelManager
+    public class LevelManager : Singleton<LevelManager>
     {
-        //[SerializeField] private List<Level> Levels;
-        private static int currentLevelId;
-        private static int nextLevelId;
+        [Header("Configuration")]
+        [SerializeField] private List<Level> levels;
+        
+        [Header("Values")]
+        [SerializeField] private Level currentLevel;
+        [SerializeField] private Level nextLevel;
+
         public static void LoadNextLevel()
         {
             SceneManager.LoadScene(SceneManager.GetCurrentSceneIndex()+1);
         }
 
-        public static IEnumerator FadeInToScene()
+        public static IEnumerator FadeIntoScene()
         {
             yield return null;
+        }
+
+        public static int GetLevelCount()
+        {
+            return LevelManager.Instance.levels.Count;
+        }
+
+        public static void UnlockNextLevel()
+        {
+            LevelManager.Instance.nextLevel.IsUnlocked = true;
+        }
+
+        public static void RestartLevel()
+        {
+            SceneManager.ReloadCurrentScene();
         }
     }
 }

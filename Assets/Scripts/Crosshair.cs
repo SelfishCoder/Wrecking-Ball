@@ -12,6 +12,7 @@ namespace WreckingBall
     /// </summary>
     public class Crosshair : MonoBehaviour
     {
+        [Header("Crosshair Properties")]
         [SerializeField] private CrosshairState crosshairState;
         [SerializeField] private Vector3 deflection;
         [SerializeField] private float crosshairHorizontalSpeed;
@@ -22,7 +23,7 @@ namespace WreckingBall
         private float timeElapsed;
         private float power;
 
-        [Header("Refences to UI Elements")] 
+        [Header("References to UI Elements")] 
         [SerializeField] private Slider powerBarUI;
         [SerializeField] private Image horizontalAxisImage;
         [SerializeField] private Image verticalAxisImage;
@@ -39,8 +40,9 @@ namespace WreckingBall
             powerImage.gameObject.SetActive(false);
             horizontalAxisImage.gameObject.SetActive(true);
             verticalAxisImage.gameObject.SetActive(true);
-            crosshairHorizontalSpeed = 2.75f;
+            crosshairHorizontalSpeed = 3.25f;
             crosshairVerticalSpeed = 3.5f;
+            powerbarFillSpeed = 0.03f;
             CalculateDeflectionOfCrosshair();
             timeElapsed = 0;
             newPosition = Vector3.zero;
@@ -52,8 +54,8 @@ namespace WreckingBall
         /// </summary>
         private void CalculateDeflectionOfCrosshair()
         {
-            float deflectionX = (((canvasReferenceResolution.x / 2) / 10) * 9) - (this.GetComponent<RectTransform>().sizeDelta.x / 2);
-            float deflectionY = (((canvasReferenceResolution.y / 2) / 10) * 7.5f) - (this.GetComponent<RectTransform>().sizeDelta.y / 2);
+            float deflectionX = (((canvasReferenceResolution.x / 2) / 10) * 9.75f) - (this.GetComponent<RectTransform>().sizeDelta.x / 2);
+            float deflectionY = (((canvasReferenceResolution.y / 2) / 10) * 8.0f) - (this.GetComponent<RectTransform>().sizeDelta.y / 2);
             deflection = new Vector3(deflectionX, deflectionY, 0);
         }
 
@@ -77,7 +79,11 @@ namespace WreckingBall
 
         private void PowerPingPong()
         {
-            power = Mathf.PingPong(timeElapsed * powerbarFillSpeed, 100f);
+            power = Mathf.Abs(Mathf.Sin(timeElapsed * powerbarFillSpeed) * 100);
+            /*
+                Alternative way to change value between 0-100 linearlly 
+                power = Mathf.PingPong(timeElapsed * powerbarFillSpeed, 100f);
+            */
             timeElapsed++;
             powerBarUI.value = power;
             powerText.text = powerBarUI.value.ToString();
