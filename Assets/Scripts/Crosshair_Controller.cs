@@ -97,7 +97,7 @@ namespace WreckingBall
                         {
                             if (CastRayToScreenPoint(transform.position))
                             {
-                                if (raycastHit.collider.name.Equals("PerfectPoint"))
+                                if (raycastHit.collider.CompareTag("Perfect"))
                                 {
                                    StartCoroutine( OnPerfect(raycastHit.collider.transform.position));
                                 }
@@ -178,7 +178,13 @@ namespace WreckingBall
         {
             crosshairState = CrosshairState.None;
             PlayerStats.Lives--;
+            perfectText.gameObject.SetActive(true);
+            powerText.gameObject.SetActive(true);
+            powerImage.gameObject.SetActive(true);
             yield return StartCoroutine(Animate("Perfect", 2f));
+            wreckingBall.gameObject.SetActive(true);
+            wreckingBall.Release(target);
+            UiManager.Instance.CloseCrosshair();
         }
 
         /// <summary>

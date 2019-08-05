@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Obstacle
   - FireWork
+  - Perfect
   layers:
   - Default
   - TransparentFX
