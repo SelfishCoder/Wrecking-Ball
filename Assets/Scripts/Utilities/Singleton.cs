@@ -8,7 +8,7 @@ namespace WreckingBall
     public class Singleton<TypeOfSingleton> : MonoBehaviour where TypeOfSingleton: MonoBehaviour
     {
         /// <summary>
-        /// Field of the instance object of the class which derives from this base class.
+        /// Property of the instance object of the class which is derived from this base class.
         /// </summary>
         public static TypeOfSingleton Instance { get; private set; }
 
@@ -30,6 +30,10 @@ namespace WreckingBall
                     Instance = go.AddComponent<TypeOfSingleton>();
                     DontDestroyOnLoad(go);
                 }
+            }
+            else
+            {
+                Destroy(gameObject);
             }
         }
     }

@@ -26,7 +26,7 @@ namespace WreckingBall
         public static void LoadScene(string sceneName)
         {
             int sceneIndex = UnityEngine.SceneManagement.SceneManager.GetSceneByName(sceneName).buildIndex;
-            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneIndex);
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace WreckingBall
         /// <param name="sceneIndex"></param>
         public static void LoadScene(int sceneIndex)
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneIndex);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneIndex,LoadSceneMode.Additive);
         }
 
         /// <summary>
@@ -57,13 +57,17 @@ namespace WreckingBall
             return UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
         }
 
+        public static Scene GetSceneByName(string sceneName)
+        {
+            return UnityEngine.SceneManagement.SceneManager.GetSceneByName(sceneName);
+        }
+
         /// <summary>
         /// This method reloads the currently active scene.
         /// </summary>
         public static void ReloadCurrentScene()
         {
-            int buildIndex = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
-            LoadScene(buildIndex);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
         }
 
         /// <summary>

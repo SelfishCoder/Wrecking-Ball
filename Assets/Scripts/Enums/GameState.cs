@@ -6,7 +6,10 @@
     public enum GameState
     {
         InGame,
-        MainMenu,
-        PauseMenu
+        OnMainMenu,
+        OnPauseMenu,
+        Won,
+        Lost,
+        None
     }
 }

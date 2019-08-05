@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
+using UnityEngine.Android;
+using UnityEngine.SceneManagement;
 
 namespace WreckingBall
 {
@@ -8,9 +11,7 @@ namespace WreckingBall
     [DisallowMultipleComponent]
     public class GameManager : Singleton<GameManager>
     {
-        [SerializeField, Tooltip("State of the game in the lifetime.")]
         private static GameState currentGameState;
-
         public static GameState CurrentGameState
         {
             get => currentGameState;
@@ -22,7 +23,7 @@ namespace WreckingBall
         /// </summary>
         private void Awake()
         {
-            currentGameState = GameState.MainMenu;
+            currentGameState = GameState.OnMainMenu;
         }
 
         /// <summary>
@@ -32,20 +33,67 @@ namespace WreckingBall
         {
             switch (currentGameState)
             {
-                case GameState.MainMenu:
+                case GameState.OnMainMenu:
                     if (!SceneManager.IsCurrentScene("Main Menu"))
                         SceneManager.LoadScene("Main Menu");
                     break;
 
                 case GameState.InGame:
+                    if (PlayerStats.Lives == 0 )
+                    {
+                        if (LevelManager.Instance.LevelProgress.Equals(100))
+                        {
+                            currentGameState = GameState.Won;
+                        }
+                        else
+                        {
+                            currentGameState = GameState.Lost;
+                        }
+                    }
+                    if (LevelManager.Instance.LevelProgress.Equals(100))
+                    {
+                        currentGameState = GameState.Won;
+                    }
                     break;
 
-                case GameState.PauseMenu:
+                case GameState.OnPauseMenu:
                     break;
 
-                default:
+                case GameState.Won:
+                    StartCoroutine(OnLevelWon());
+                    break;
+                
+                case GameState.Lost:
+                    UiManager.Instance.OpenLostPanel();
+                    UiManager.Instance.CloseCrosshair();
+                    currentGameState = GameState.None;
+                    break;
+                
+                case GameState.None:
                     break;
             }
+        }
+
+        /// <summary>
+        /// This method sets gamestate to none.
+        /// Shows fireworks.
+        /// Update Level score and shows.
+        /// </summary>
+        /// <returns>StartCoroutine</returns>
+        private IEnumerator OnLevelWon()
+        {
+            currentGameState = GameState.None;
+            yield return StartCoroutine(LevelManager.Instance.ShowFireworks());
+            if (PlayerStats.Lives == 4)
+                LevelManager.Instance.currentLevel.CollectedStarAmount = 3;
+            else if (2 <= (PlayerStats.Lives) || PlayerStats.Lives <= 3)
+                LevelManager.Instance.currentLevel.CollectedStarAmount = 2;
+            else
+                LevelManager.Instance.currentLevel.CollectedStarAmount = 1;
+            UiManager.Instance.ResetWonPanel();
+            UiManager.Instance.UpdateWonPanel();
+            UiManager.Instance.OpenWonPanel();
+            UiManager.Instance.CloseCrosshair();
         }
     }
 }

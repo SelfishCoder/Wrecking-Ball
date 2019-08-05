@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace WreckingBall
 {
@@ -15,7 +16,15 @@ namespace WreckingBall
         /// <returns>True or false</returns>
         public static bool IsScreenTapted()
         {
-            return Input.GetMouseButtonDown(0);
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (EventSystem.current.IsPointerOverGameObject())
+                {
+                    return false;
+                }
+                return true;
+            }
+            return false;
         }
     }
 }
