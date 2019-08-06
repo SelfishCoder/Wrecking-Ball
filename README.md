@@ -2,9 +2,9 @@
 
 **GAMEPLAY**
 
-<p align="center">
-![](movie.gif)
-</p>
+<div align="center">
+<img src="/movie.gif">
+</div>
 
 Some of the assets are taken from Kenny's game assets pack, some of them are drawn by Meriç Balıkçı.
 
