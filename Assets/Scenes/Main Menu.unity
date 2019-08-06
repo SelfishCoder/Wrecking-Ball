@@ -2695,7 +2695,7 @@ MonoBehaviour:
   - Id: 1
     IsUnlocked: 1
     Name: Level1
-    CollectedStarAmount: 3
+    CollectedStarAmount: 0
     levelButton: {fileID: 0}
     Obstacle: {fileID: 0}
   - Id: 2

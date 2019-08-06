@@ -74,6 +74,18 @@
     <Compile Include="Assets\Scripts\Utilities\LevelButtonCreator.cs" />
     <Compile Include="Assets\Scripts\Utilities\Singleton.cs" />
     <Compile Include="Assets\Scripts\WreckingBall_Controller.cs" />
+    <Reference Include="Unity.Timeline.Editor">
+      <HintPath>C:/Projects/Unity Projects/Wrecking Ball/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Recorder.Editor">
+      <HintPath>C:/Projects/Unity Projects/Wrecking Ball/Library/ScriptAssemblies/Unity.Recorder.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Recorder">
+      <HintPath>C:/Projects/Unity Projects/Wrecking Ball/Library/ScriptAssemblies/Unity.Recorder.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Timeline">
+      <HintPath>C:/Projects/Unity Projects/Wrecking Ball/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
       <HintPath>C:/Projects/Unity Projects/Wrecking Ball/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
